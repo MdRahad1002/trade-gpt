@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade GPT Admin Dashboard</title>
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal" style="display: flex;">
+        <div class="modal-content login-form">
+            <h2>Trade GPT Admin Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="admin" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+            <div id="loginError" class="error-message"></div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="dashboard" class="dashboard" style="display: none;">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="../logo.svg" alt="Trade GPT" class="logo-icon">
+                    <span class="logo-text">Trade GPT Admin</span>
+                </div>
+                <div class="header-actions">
+                    <span id="welcomeText" class="welcome-text"></span>
+                    <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="sidebar">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" data-section="leads">
+                        <span class="nav-icon">👥</span>
+                        <span>Leads</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="integrations">
+                        <span class="nav-icon">🔗</span>
+                        <span>Integrations</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="exports">
+                        <span class="nav-icon">📊</span>
+                        <span>Exports</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="analytics">
+                        <span class="nav-icon">📈</span>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Leads Section -->
+            <section id="leadsSection" class="content-section active">
+                <div class="section-header">
+                    <h1>Lead Management</h1>
+                    <div class="section-actions">
+                        <button id="refreshLeads" class="btn btn-secondary">
+                            <span class="btn-icon">🔄</span>
+                            Refresh
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="filters-bar">
+                    <div class="filter-group">
+                        <input type="text" id="searchInput" placeholder="Search leads..." class="search-input">
+                    </div>
+                    <div class="filter-group">
+                        <select id="statusFilter" class="filter-select">
+                            <option value="">All Status</option>
+                            <option value="new">New</option>
+                            <option value="contacted">Contacted</option>
+                            <option value="qualified">Qualified</option>
+                            <option value="converted">Converted</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <select id="investmentFilter" class="filter-select">
+                            <option value="">All Investments</option>
+                            <option value="0-249">$0 - $249</option>
+                            <option value="250-999">$250 - $999</option>
+                            <option value="1000-1499">$1,000 - $1,499</option>
+                            <option value="1500+">$1,500+</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Bulk Actions Bar -->
+                <div class="bulk-actions-bar" id="bulkActionsBar" style="display: none;">
+                    <div class="bulk-info">
+                        <span id="selectedCount">0</span> leads selected
+                    </div>
+                    <div class="bulk-buttons">
+                        <button id="exportSelectedCSV" class="btn btn-secondary">
+                            <span class="btn-icon">📥</span>
+                            Export CSV
+                        </button>
+                        <button id="exportSelectedExcel" class="btn btn-secondary">
+                            <span class="btn-icon">📊</span>
+                            Export Excel
+                        </button>
+                        <button id="sendToWebhook" class="btn btn-primary">
+                            <span class="btn-icon">🔗</span>
+                            Send to Webhook
+                        </button>
+                        <button id="deselectAll" class="btn btn-secondary">Clear Selection</button>
+                    </div>
+                </div>
+
+                <!-- Statistics Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="totalLeads">0</div>
+                            <div class="stat-label">Total Leads</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🆕</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="newLeads">0</div>
+                            <div class="stat-label">New Leads</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="convertedLeads">0</div>
+                            <div class="stat-label">Converted</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📞</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="todaysLeads">0</div>
+                            <div class="stat-label">Today's Leads</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leads Table -->
+                <div class="table-container">
+                    <table class="leads-table">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="selectAllLeads"></th>
+                                <th>ID</th>
+                                <th>Name & Country</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Investment</th>
+                                <th>Status</th>
+                                <th>Source & Deposit</th>
+                                <th>Date & Experience</th>
+                                <th style="min-width: 200px;">Notes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leadsTableBody">
+                            <!-- Leads will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination" id="pagination">
+                    <!-- Pagination will be generated here -->
+                </div>
+            </section>
+
+            <!-- Integrations Section -->
+            <section id="integrationsSection" class="content-section">
+                <div class="section-header">
+                    <h1>CRM Integrations</h1>
+                    <button id="addIntegration" class="btn btn-primary">
+                        <span class="btn-icon">➕</span>
+                        Add Integration
+                    </button>
+                </div>
+
+                <div class="integrations-grid">
+                    <div class="integration-card">
+                        <div class="integration-header">
+                            <div class="integration-icon">🔗</div>
+                            <h3>HubSpot</h3>
+                            <div class="integration-status inactive">Inactive</div>
+                        </div>
+                        <div class="integration-content">
+                            <p>Connect to HubSpot CRM to automatically sync new leads</p>
+                            <button class="btn btn-primary">Configure</button>
+                        </div>
+                    </div>
+
+                    <div class="integration-card">
+                        <div class="integration-header">
+                            <div class="integration-icon">⚡</div>
+                            <h3>Salesforce</h3>
+                            <div class="integration-status inactive">Inactive</div>
+                        </div>
+                        <div class="integration-content">
+                            <p>Sync leads with Salesforce CRM automatically</p>
+                            <button class="btn btn-primary">Configure</button>
+                        </div>
+                    </div>
+
+                    <div class="integration-card">
+                        <div class="integration-header">
+                            <div class="integration-icon">🚀</div>
+                            <h3>Pipedrive</h3>
+                            <div class="integration-status inactive">Inactive</div>
+                        </div>
+                        <div class="integration-content">
+                            <p>Send leads to Pipedrive for pipeline management</p>
+                            <button class="btn btn-primary">Configure</button>
+                        </div>
+                    </div>
+
+                    <div class="integration-card">
+                        <div class="integration-header">
+                            <div class="integration-icon">🌐</div>
+                            <h3>Webhook</h3>
+                            <div class="integration-status inactive">Inactive</div>
+                        </div>
+                        <div class="integration-content">
+                            <p>Send leads to any custom endpoint via webhook</p>
+                            <button class="btn btn-primary">Configure</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exports Section -->
+            <section id="exportsSection" class="content-section">
+                <div class="section-header">
+                    <h1>Export Leads</h1>
+                </div>
+
+                <div class="export-options">
+                    <div class="export-card">
+                        <div class="export-icon">📄</div>
+                        <h3>CSV Export</h3>
+                        <p>Export all leads data to CSV format for spreadsheet applications</p>
+                        <button id="exportCSV" class="btn btn-primary">
+                            <span class="btn-icon">📥</span>
+                            Export CSV
+                        </button>
+                    </div>
+
+                    <div class="export-card">
+                        <div class="export-icon">📊</div>
+                        <h3>Excel Export</h3>
+                        <p>Export leads data to Excel format with formatting and charts</p>
+                        <button id="exportExcel" class="btn btn-primary">
+                            <span class="btn-icon">📥</span>
+                            Export Excel
+                        </button>
+                    </div>
+                </div>
+
+                <div class="export-history">
+                    <h3>Recent Exports</h3>
+                    <div class="export-list">
+                        <!-- Export history will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analyticsSection" class="content-section">
+                <div class="section-header">
+                    <h1>Analytics Dashboard</h1>
+                </div>
+
+                <div class="analytics-grid">
+                    <div class="chart-card">
+                        <h3>Leads by Source</h3>
+                        <div class="chart-placeholder">
+                            <canvas id="sourceChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3>Conversion Funnel</h3>
+                        <div class="chart-placeholder">
+                            <canvas id="funnelChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3>Leads Over Time</h3>
+                        <div class="chart-placeholder">
+                            <canvas id="timeChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3>Investment Distribution</h3>
+                        <div class="chart-placeholder">
+                            <canvas id="investmentChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Edit Lead Modal -->
+    <div id="editLeadModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Lead</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <form id="editLeadForm">
+                <input type="hidden" id="editLeadId">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editFirstName">First Name</label>
+                        <input type="text" id="editFirstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editLastName">Last Name</label>
+                        <input type="text" id="editLastName" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">Email</label>
+                    <input type="email" id="editEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="editPhone">Phone</label>
+                    <input type="tel" id="editPhone" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editInvestment">Investment</label>
+                        <select id="editInvestment" required>
+                            <option value="0-249">$0 - $249</option>
+                            <option value="250-999">$250 - $999</option>
+                            <option value="1000-1499">$1,000 - $1,499</option>
+                            <option value="1500+">$1,500+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editStatus">Status</label>
+                        <select id="editStatus" required>
+                            <option value="new">New</option>
+                            <option value="contacted">Contacted</option>
+                            <option value="qualified">Qualified</option>
+                            <option value="converted">Converted</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editNotes">Notes</label>
+                    <textarea id="editNotes" rows="4"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary cancel-edit">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Webhook Configuration Modal -->
+    <div id="webhookModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Send Leads to Webhook</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <form id="webhookForm">
+                <div class="form-group">
+                    <label for="webhookURL">Webhook URL</label>
+                    <input type="url" id="webhookURL" placeholder="https://hooks.make.com/..." required>
+                    <small>Enter your Make.com, Zapier, or custom webhook URL</small>
+                </div>
+                <div class="info-box">
+                    <p><strong>Selected Leads:</strong> <span id="webhookLeadCount">0</span></p>
+                    <p>Leads will be sent in JSON format with all details including name, email, phone, investment amount, and timestamps.</p>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary cancel-webhook">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="btn-icon">🚀</span>
+                        Send to Webhook
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>

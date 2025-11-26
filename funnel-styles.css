@@ -1,0 +1,1719 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #2563eb;
+    --primary-dark: #1e40af;
+    --secondary-color: #059669;
+    --warning-color: #dc2626;
+    --dark-bg: #0f172a;
+    --dark-secondary: #1e293b;
+    --dark-tertiary: #334155;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --success-color: #10b981;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.nav-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.logo-icon {
+    font-size: 1.5rem;
+}
+
+/* Hero Section */
+.hero {
+    padding: 120px 0 80px;
+    background: linear-gradient(180deg, var(--dark-bg) 0%, var(--dark-secondary) 100%);
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+}
+
+/* CTA Button */
+.cta-button-container {
+    margin: 2rem 0;
+}
+
+.cta-button {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    padding: 1.25rem 3rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.15rem;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 30px rgba(37, 99, 235, 0.6);
+}
+
+.cta-button.large {
+    padding: 1.5rem 3.5rem;
+    font-size: 1.25rem;
+}
+
+/* Sections */
+.section {
+    padding: 80px 0;
+}
+
+.section.alt-bg {
+    background: var(--dark-secondary);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+/* Benefits Grid */
+.benefits-section {
+    background: var(--dark-secondary);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.benefit-card {
+    background: var(--dark-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2.5rem;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+}
+
+.benefit-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.benefit-card h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.benefit-card p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* Steps Container */
+.steps-container {
+    max-width: 900px;
+    margin: 2rem auto 0;
+}
+
+.step-item {
+    background: var(--dark-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    transition: all 0.3s;
+}
+
+.step-item:hover {
+    transform: translateX(10px);
+    border-color: var(--primary-color);
+}
+
+.step-number {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.step-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.step-content p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* Deposit Section */
+.deposit-section {
+    background: var(--dark-bg);
+}
+
+.deposit-box {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--dark-tertiary);
+    border: 2px solid var(--primary-color);
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+}
+
+.deposit-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+}
+
+.deposit-box h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.deposit-main {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.deposit-detail {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.deposit-list {
+    text-align: left;
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.deposit-list li {
+    padding: 0.75rem 0;
+    color: var(--text-secondary);
+    padding-left: 2rem;
+    position: relative;
+}
+
+.deposit-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--success-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* CTA Section */
+.cta-section {
+    background: linear-gradient(135deg, var(--dark-secondary), var(--dark-bg));
+}
+
+.cta-box {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    background: var(--dark-bg);
+    border: 2px solid var(--primary-color);
+    border-radius: 24px;
+    padding: 4rem 3rem;
+    box-shadow: 0 10px 40px rgba(37, 99, 235, 0.2);
+}
+
+.cta-box h2 {
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.cta-box p {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+}
+
+/* Disclaimer Section */
+.disclaimer-section {
+    background: var(--dark-secondary);
+}
+
+.disclaimer-content {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(220, 38, 38, 0.1);
+    border: 2px solid var(--warning-color);
+    border-radius: 16px;
+    padding: 2.5rem;
+}
+
+.disclaimer-content h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.disclaimer-content p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.disclaimer-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Lead Capture Page */
+.lead-section {
+    padding: 100px 0 80px;
+    background: linear-gradient(180deg, var(--dark-bg) 0%, var(--dark-secondary) 100%);
+    min-height: 100vh;
+}
+
+.lead-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.lead-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.lead-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.lead-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* Form Styles */
+.form-wrapper {
+    background: var(--dark-tertiary);
+    border: 2px solid var(--primary-color);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 10px 40px rgba(37, 99, 235, 0.2);
+}
+
+.lead-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select {
+    background: var(--dark-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.875rem 1rem;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-group input::placeholder {
+    color: var(--text-muted);
+}
+
+/* Qualification Box */
+.qualification-box {
+    background: rgba(37, 99, 235, 0.1);
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+
+.qualification-label {
+    display: block;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.qualification-question {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    padding: 0.75rem;
+    background: var(--dark-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.radio-label:hover {
+    border-color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.05);
+}
+
+.radio-label input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.radio-label span {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* Form Disclaimer */
+.form-disclaimer {
+    background: rgba(220, 38, 38, 0.1);
+    border: 1px solid var(--warning-color);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.form-disclaimer p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Submit Button */
+.submit-button {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 1.25rem 2.5rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    margin-top: 1rem;
+}
+
+.submit-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(37, 99, 235, 0.5);
+}
+
+.submit-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.button-icon {
+    font-size: 1.5rem;
+    transition: transform 0.3s;
+}
+
+.submit-button:hover .button-icon {
+    transform: translateX(5px);
+}
+
+/* Form Message */
+.form-message {
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    margin-top: 1rem;
+    display: none;
+}
+
+.form-message.success {
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid var(--success-color);
+    color: var(--success-color);
+    display: block;
+}
+
+.form-message.error {
+    background: rgba(220, 38, 38, 0.2);
+    border: 1px solid var(--warning-color);
+    color: var(--warning-color);
+    display: block;
+}
+
+/* Trust Indicators */
+.trust-indicators {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.trust-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--dark-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+}
+
+.trust-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.trust-item p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Thank You Page */
+.thankyou-section {
+    padding: 100px 0 80px;
+    background: linear-gradient(180deg, var(--dark-bg) 0%, var(--dark-secondary) 100%);
+    min-height: 100vh;
+}
+
+.thankyou-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.success-icon {
+    width: 100px;
+    height: 100px;
+    background: var(--success-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    font-weight: 700;
+    margin: 0 auto 2rem;
+}
+
+.thankyou-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.thankyou-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+}
+
+/* Next Steps Box */
+.next-steps-box {
+    background: var(--dark-tertiary);
+    border: 2px solid var(--primary-color);
+    border-radius: 20px;
+    padding: 3rem;
+    margin-bottom: 3rem;
+    text-align: left;
+}
+
+.next-steps-box h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.intro-text {
+    text-align: center;
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.steps-list .step-item {
+    background: var(--dark-bg);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+}
+
+.steps-list .step-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.25rem;
+}
+
+.step-text h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.step-text p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Contact Info Box */
+.contact-info-box {
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid var(--primary-color);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+.contact-info-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.contact-info-box p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+}
+
+.contact-info-box .small-text {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Optional Video */
+.optional-video {
+    background: var(--dark-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.optional-video h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.optional-video p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.video-button {
+    display: inline-block;
+    background: var(--dark-tertiary);
+    border: 2px solid var(--primary-color);
+    color: var(--text-primary);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.video-button:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.video-note {
+    margin-top: 1rem;
+    color: var(--text-muted);
+}
+
+/* Footer */
+.footer {
+    background: var(--dark-bg);
+    padding: 40px 0 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.footer-section h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.footer-section p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+}
+
+.footer-bottom p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+
+/* Large Desktop (1440px and up) */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .hero-title {
+        font-size: 3.5rem;
+    }
+    
+    .section-title {
+        font-size: 2.75rem;
+    }
+}
+
+/* Desktop (1024px to 1439px) */
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .container {
+        max-width: 1100px;
+    }
+    
+    .hero-title {
+        font-size: 2.75rem;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Tablet Landscape (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .container {
+        max-width: 960px;
+        padding: 0 30px;
+    }
+    
+    .hero {
+        padding: 100px 0 60px;
+        min-height: 60vh;
+    }
+
+    .hero-title {
+        font-size: 2.25rem;
+        line-height: 1.3;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .section {
+        padding: 60px 0;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.75rem;
+    }
+
+    .benefit-card {
+        padding: 2rem;
+    }
+
+    .benefit-icon {
+        font-size: 3rem;
+    }
+
+    .step-item {
+        padding: 1.75rem;
+    }
+
+    .step-number {
+        width: 55px;
+        height: 55px;
+        font-size: 1.5rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+    }
+
+    .form-wrapper {
+        padding: 2.5rem;
+    }
+
+    .trust-indicators {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .cta-button {
+        padding: 1.15rem 2.75rem;
+        font-size: 1.05rem;
+    }
+
+    .cta-button.large {
+        padding: 1.35rem 3.25rem;
+        font-size: 1.15rem;
+    }
+
+    .deposit-box {
+        padding: 2.5rem;
+    }
+
+    .next-steps-box {
+        padding: 2.5rem;
+    }
+
+    .thankyou-title {
+        font-size: 2.5rem;
+    }
+
+    .lead-title {
+        font-size: 2.25rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+/* Tablet Portrait (600px to 767px) */
+@media (min-width: 600px) and (max-width: 767px) {
+    .container {
+        padding: 0 25px;
+    }
+
+    .hero {
+        padding: 90px 0 50px;
+        min-height: 55vh;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+        line-height: 1.3;
+    }
+
+    .hero-subtitle {
+        font-size: 1.05rem;
+        margin-bottom: 2rem;
+    }
+
+    .section {
+        padding: 50px 0;
+    }
+
+    .section-title {
+        font-size: 1.85rem;
+    }
+
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .benefit-card {
+        padding: 1.75rem;
+    }
+
+    .benefit-icon {
+        font-size: 2.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .benefit-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .step-item {
+        padding: 1.5rem;
+        gap: 1.5rem;
+    }
+
+    .step-number {
+        width: 50px;
+        height: 50px;
+        font-size: 1.4rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-wrapper {
+        padding: 2rem;
+    }
+
+    .trust-indicators {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+
+    .cta-button {
+        padding: 1rem 2.25rem;
+        font-size: 1rem;
+    }
+
+    .cta-button.large {
+        padding: 1.2rem 2.75rem;
+        font-size: 1.1rem;
+    }
+
+    .deposit-box {
+        padding: 2rem;
+    }
+
+    .next-steps-box {
+        padding: 2rem;
+    }
+
+    .thankyou-title {
+        font-size: 2.25rem;
+    }
+
+    .lead-title {
+        font-size: 2rem;
+    }
+
+    .success-icon {
+        width: 85px;
+        height: 85px;
+        font-size: 3.5rem;
+    }
+}
+
+/* Mobile Landscape (480px to 599px) */
+@media (min-width: 480px) and (max-width: 599px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    .hero {
+        padding: 85px 0 45px;
+        min-height: auto;
+    }
+
+    .hero-title {
+        font-size: 1.85rem;
+        line-height: 1.3;
+        margin-bottom: 1.25rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1.75rem;
+    }
+
+    .section {
+        padding: 45px 0;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .benefit-card {
+        padding: 1.75rem 1.5rem;
+    }
+
+    .benefit-icon {
+        font-size: 2.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .benefit-card h3 {
+        font-size: 1.15rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .benefit-card p {
+        font-size: 0.95rem;
+    }
+
+    .step-item {
+        flex-direction: row;
+        padding: 1.5rem;
+        gap: 1.25rem;
+    }
+
+    .step-number {
+        width: 48px;
+        height: 48px;
+        font-size: 1.35rem;
+    }
+
+    .step-content h3 {
+        font-size: 1.15rem;
+    }
+
+    .step-content p {
+        font-size: 0.95rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-wrapper {
+        padding: 1.75rem 1.5rem;
+    }
+
+    .form-group label {
+        font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group select {
+        padding: 0.8rem 0.9rem;
+        font-size: 0.95rem;
+    }
+
+    .trust-indicators {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .trust-item {
+        padding: 1.25rem;
+    }
+
+    .trust-icon {
+        font-size: 2.25rem;
+    }
+
+    .cta-button {
+        padding: 0.95rem 2rem;
+        font-size: 0.95rem;
+    }
+
+    .cta-button.large {
+        padding: 1.1rem 2.5rem;
+        font-size: 1.05rem;
+    }
+
+    .deposit-box {
+        padding: 1.75rem 1.5rem;
+    }
+
+    .deposit-main {
+        font-size: 1.35rem;
+    }
+
+    .next-steps-box {
+        padding: 1.75rem 1.5rem;
+    }
+
+    .thankyou-title {
+        font-size: 2rem;
+    }
+
+    .lead-title {
+        font-size: 1.85rem;
+    }
+
+    .success-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 3.25rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .submit-button {
+        padding: 1.1rem 2.25rem;
+        font-size: 1.05rem;
+    }
+}
+
+/* Mobile Portrait (320px to 479px) */
+@media (max-width: 479px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    .navbar {
+        padding: 0;
+    }
+
+    .nav-content {
+        padding: 0.75rem 0;
+    }
+
+    .logo {
+        font-size: 1.1rem;
+        gap: 0.5rem;
+    }
+
+    .logo-icon {
+        font-size: 1.35rem;
+    }
+
+    .hero {
+        padding: 80px 0 40px;
+        min-height: auto;
+    }
+
+    .hero-title {
+        font-size: 1.65rem;
+        line-height: 1.25;
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .cta-button-container {
+        margin: 1.5rem 0;
+    }
+
+    .section {
+        padding: 40px 0;
+    }
+
+    .section-header {
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 1.15rem;
+    }
+
+    .benefit-card {
+        padding: 1.5rem 1.25rem;
+        text-align: center;
+    }
+
+    .benefit-icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.85rem;
+    }
+
+    .benefit-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.65rem;
+    }
+
+    .benefit-card p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .steps-container {
+        margin-top: 1.5rem;
+    }
+
+    .step-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.35rem 1.15rem;
+        gap: 1rem;
+        margin-bottom: 1.15rem;
+    }
+
+    .step-number {
+        width: 45px;
+        height: 45px;
+        font-size: 1.25rem;
+        margin: 0 auto;
+    }
+
+    .step-content h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .step-content p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .deposit-box {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .deposit-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .deposit-box h2 {
+        font-size: 1.65rem;
+        margin-bottom: 1.15rem;
+    }
+
+    .deposit-main {
+        font-size: 1.2rem;
+        margin-bottom: 0.85rem;
+    }
+
+    .deposit-detail {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .deposit-list {
+        max-width: 100%;
+    }
+
+    .deposit-list li {
+        padding: 0.65rem 0;
+        padding-left: 1.75rem;
+        font-size: 0.9rem;
+    }
+
+    .deposit-list li::before {
+        font-size: 1rem;
+    }
+
+    .cta-box {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .cta-box h2 {
+        font-size: 1.85rem;
+        margin-bottom: 0.85rem;
+    }
+
+    .cta-box p {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .cta-button {
+        padding: 0.875rem 1.75rem;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .cta-button.large {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .disclaimer-content {
+        padding: 1.75rem 1.25rem;
+    }
+
+    .disclaimer-content h3 {
+        font-size: 1.45rem;
+        margin-bottom: 1.15rem;
+    }
+
+    .disclaimer-content p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        margin-bottom: 0.85rem;
+    }
+
+    /* Lead Capture Page Mobile */
+    .lead-section {
+        padding: 85px 0 50px;
+    }
+
+    .lead-header {
+        margin-bottom: 2rem;
+    }
+
+    .lead-title {
+        font-size: 1.7rem;
+        line-height: 1.3;
+        margin-bottom: 0.85rem;
+    }
+
+    .lead-subtitle {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .form-wrapper {
+        padding: 1.5rem 1.15rem;
+    }
+
+    .lead-form {
+        gap: 1.25rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .form-group label {
+        font-size: 0.88rem;
+    }
+
+    .form-group input,
+    .form-group select {
+        padding: 0.75rem 0.85rem;
+        font-size: 0.9rem;
+    }
+
+    .qualification-box {
+        padding: 1.25rem;
+        margin-top: 0.75rem;
+    }
+
+    .qualification-label {
+        font-size: 0.93rem;
+        margin-bottom: 0.65rem;
+    }
+
+    .qualification-question {
+        font-size: 0.97rem;
+        margin-bottom: 0.85rem;
+    }
+
+    .radio-label {
+        padding: 0.7rem;
+        gap: 0.65rem;
+    }
+
+    .radio-label span {
+        font-size: 0.9rem;
+    }
+
+    .form-disclaimer {
+        padding: 0.85rem;
+    }
+
+    .form-disclaimer p small {
+        font-size: 0.82rem;
+    }
+
+    .submit-button {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        width: 100%;
+    }
+
+    .button-icon {
+        font-size: 1.35rem;
+    }
+
+    .trust-indicators {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .trust-item {
+        padding: 1.15rem;
+    }
+
+    .trust-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .trust-item p {
+        font-size: 0.88rem;
+        line-height: 1.5;
+    }
+
+    /* Thank You Page Mobile */
+    .thankyou-section {
+        padding: 85px 0 50px;
+    }
+
+    .success-icon {
+        width: 75px;
+        height: 75px;
+        font-size: 3rem;
+        margin-bottom: 1.35rem;
+    }
+
+    .thankyou-title {
+        font-size: 1.9rem;
+        margin-bottom: 0.85rem;
+    }
+
+    .thankyou-subtitle {
+        font-size: 1.05rem;
+        margin-bottom: 2.25rem;
+    }
+
+    .next-steps-box {
+        padding: 1.5rem 1.15rem;
+        margin-bottom: 2rem;
+    }
+
+    .next-steps-box h2 {
+        font-size: 1.65rem;
+        margin-bottom: 0.85rem;
+    }
+
+    .intro-text {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .steps-list {
+        gap: 1.15rem;
+    }
+
+    .steps-list .step-item {
+        padding: 1.25rem 1rem;
+    }
+
+    .steps-list .step-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 1.15rem;
+    }
+
+    .step-text h3 {
+        font-size: 1.05rem;
+        margin-bottom: 0.45rem;
+    }
+
+    .step-text p {
+        font-size: 0.88rem;
+        line-height: 1.6;
+    }
+
+    .contact-info-box {
+        padding: 1.5rem 1.15rem;
+        margin-bottom: 2rem;
+    }
+
+    .contact-info-box h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.85rem;
+    }
+
+    .contact-info-box p {
+        font-size: 0.92rem;
+        line-height: 1.6;
+    }
+
+    .contact-info-box .small-text {
+        font-size: 0.85rem;
+    }
+
+    .optional-video {
+        padding: 1.75rem 1.25rem;
+        margin-bottom: 2rem;
+    }
+
+    .optional-video h3 {
+        font-size: 1.45rem;
+        margin-bottom: 0.85rem;
+    }
+
+    .optional-video p {
+        font-size: 0.95rem;
+        margin-bottom: 1.35rem;
+    }
+
+    .video-button {
+        padding: 0.85rem 1.75rem;
+        font-size: 0.95rem;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .video-note {
+        font-size: 0.8rem;
+        margin-top: 0.85rem;
+    }
+
+    /* Footer Mobile */
+    .footer {
+        padding: 30px 0 15px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .footer-section h4 {
+        font-size: 1rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .footer-section p {
+        font-size: 0.88rem;
+        line-height: 1.6;
+    }
+
+    .footer-bottom {
+        padding-top: 1.5rem;
+    }
+
+    .footer-bottom p {
+        font-size: 0.83rem;
+        margin: 0.4rem 0;
+    }
+}
+
+/* Extra Small Mobile (below 360px) */
+@media (max-width: 359px) {
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 1.45rem;
+    }
+
+    .benefit-card {
+        padding: 1.25rem 1rem;
+    }
+
+    .benefit-icon {
+        font-size: 2.25rem;
+    }
+
+    .cta-button {
+        font-size: 0.85rem;
+        padding: 0.8rem 1.5rem;
+    }
+
+    .lead-title {
+        font-size: 1.55rem;
+    }
+
+    .thankyou-title {
+        font-size: 1.75rem;
+    }
+}
+
+/* Footer Styles */
+.footer {
+    background: var(--dark-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: 3rem 0 1.5rem;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.footer-disclaimer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer-disclaimer p {
+    margin: 0.5rem 0;
+}
+
+.footer-disclaimer strong {
+    color: var(--warning-color);
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Selection */
+::selection {
+    background: var(--primary-color);
+    color: white;
+}

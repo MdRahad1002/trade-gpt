@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade GPT - Automated Trading Software</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <img src="logo.svg" alt="Trade GPT" class="logo-icon-img">
+                    <span class="logo-text">Trade GPT</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#features" onclick="return scrollToSection('#features')">Features</a>
+                    <a href="#testimonials" onclick="return scrollToSection('#testimonials')">Testimonials</a>
+                    <a href="#signup" class="cta-button" onclick="return scrollToSection('#signup')">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        AI-Powered Trading That Works While You Sleep
+                    </h1>
+                    <p class="hero-subtitle">
+                        Trade GPT integrates with leading platforms like Trading212, IC Markets, and eToro. 
+                        Our users earn up to <span class="highlight">£1,200 monthly</span> with zero manual trading.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number">£847M+</div>
+                            <div class="stat-label">Total Volume Traded</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">28,500+</div>
+                            <div class="stat-label">Active Traders</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">87.3%</div>
+                            <div class="stat-label">Win Rate</div>
+                        </div>
+                    </div>
+                    <a href="#signup" class="hero-cta" onclick="return scrollToSection('#signup')">Start Trading Now</a>
+                </div>
+                <div class="hero-image">
+                    <div class="trading-card">
+                        <div class="card-header">
+                            <span class="status-dot"></span>
+                            <span>Live Trading Session</span>
+                            <span class="platform-badge">Trading212</span>
+                        </div>
+                        <div class="trading-stats">
+                            <div class="trading-stat">
+                                <span class="stat-label">EUR/USD</span>
+                                <span class="stat-value positive">+1.34%</span>
+                            </div>
+                            <div class="trading-stat">
+                                <span class="stat-label">GBP/USD</span>
+                                <span class="stat-value positive">+0.87%</span>
+                            </div>
+                            <div class="trading-stat">
+                                <span class="stat-label">AAPL</span>
+                                <span class="stat-value positive">+2.15%</span>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="liveChart" width="400" height="200"></canvas>
+                        </div>
+                        <div class="trade-info">
+                            <div class="trade-profit">+£1,247.83</div>
+                            <div class="trade-label">Today's Profit • 14 Trades</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By Section -->
+    <section class="trusted-by">
+        <div class="container">
+            <p class="trusted-text">Integrated with leading trading platforms worldwide</p>
+            <div class="company-logos">
+                <div class="company-logo">
+                    <span class="logo-icon">📊</span>
+                    <span class="logo-text">Trading212</span>
+                </div>
+                <div class="company-logo">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">IC Markets</span>
+                </div>
+                <div class="company-logo">
+                    <span class="logo-icon">📈</span>
+                    <span class="logo-text">Plus500</span>
+                </div>
+                <div class="company-logo">
+                    <span class="logo-icon">🔥</span>
+                    <span class="logo-text">eToro</span>
+                </div>
+                <div class="company-logo">
+                    <span class="logo-icon">💎</span>
+                    <span class="logo-text">XM Global</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Powerful Features for Maximum Profit</h2>
+                <p class="section-subtitle">Everything you need to succeed in automated trading</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="feature-title">Fully Automated</h3>
+                    <p class="feature-description">
+                        Our AI analyzes markets 24/7 and executes trades automatically. 
+                        No manual intervention required.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3 class="feature-title">High Returns</h3>
+                    <p class="feature-description">
+                        Earn up to $800 daily with our proven trading strategies and 
+                        advanced algorithms.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3 class="feature-title">Risk Management</h3>
+                    <p class="feature-description">
+                        Built-in stop-loss and take-profit mechanisms protect your 
+                        capital at all times.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Real-Time Analytics</h3>
+                    <p class="feature-description">
+                        Monitor your portfolio with detailed reports, charts, and 
+                        performance metrics.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Lightning Fast</h3>
+                    <p class="feature-description">
+                        Execute trades in milliseconds to capitalize on market 
+                        opportunities instantly.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Bank-Level Security</h3>
+                    <p class="feature-description">
+                        Your funds and data are protected with military-grade 
+                        encryption technology.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Table -->
+    <section class="key-features-table">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Key Features of the Trade GPT Platform</h2>
+            </div>
+            <div class="features-table">
+                <div class="feature-row">
+                    <div class="feature-label">
+                        <span class="feature-emoji">🤖</span>
+                        <span>Platform Type</span>
+                    </div>
+                    <div class="feature-value">AI-powered Trading System</div>
+                </div>
+                <div class="feature-row">
+                    <div class="feature-label">
+                        <span class="feature-emoji">💳</span>
+                        <span>Deposit Options</span>
+                    </div>
+                    <div class="feature-value">Credit/Debit Card, Bank Transfer, PayPal</div>
+                </div>
+                <div class="feature-row">
+                    <div class="feature-label">
+                        <span class="feature-emoji">📱</span>
+                        <span>Account Accessibility</span>
+                    </div>
+                    <div class="feature-value">Accessible on All Devices</div>
+                </div>
+                <div class="feature-row">
+                    <div class="feature-label">
+                        <span class="feature-emoji">🚀</span>
+                        <span>Success Rate</span>
+                    </div>
+                    <div class="feature-value">85%</div>
+                </div>
+                <div class="feature-row">
+                    <div class="feature-label">
+                        <span class="feature-emoji">📊</span>
+                        <span>Assets</span>
+                    </div>
+                    <div class="feature-value">
+                        <div class="asset-list">
+                            <span class="asset-tag">📈 Stocks</span>
+                            <span class="asset-tag">💱 Forex</span>
+                            <span class="asset-tag">🥇 Commodities</span>
+                            <span class="asset-tag">💎 Precious Metals</span>
+                            <span class="asset-tag">📊 CFDs</span>
+                            <span class="asset-tag">₿ Cryptos</span>
+                            <span class="asset-tag">🏢 Indices</span>
+                            <span class="asset-tag">📜 Bonds</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-row">
+                    <div class="feature-label">
+                        <span class="feature-emoji">✍️</span>
+                        <span>Registration Process</span>
+                    </div>
+                    <div class="feature-value">Streamlined and Easy</div>
+                </div>
+                <div class="feature-row">
+                    <div class="feature-label">
+                        <span class="feature-emoji">📞</span>
+                        <span>Customer Support</span>
+                    </div>
+                    <div class="feature-value">24/7 via Contact Form and Email</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supported Platforms Section -->
+    <section class="supported-platforms">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Compatible with Leading Trading Platforms</h2>
+                <p class="section-subtitle">Trade GPT seamlessly integrates with the world's most trusted brokers</p>
+            </div>
+            <div class="platforms-grid">
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-icon">📊</div>
+                        <h3 class="platform-name">Trading212</h3>
+                    </div>
+                    <div class="platform-stats">
+                        <div class="stat">
+                            <span class="stat-label">Commission-Free</span>
+                            <span class="stat-value">✓</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Min Deposit</span>
+                            <span class="stat-value">$1</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Instruments</span>
+                            <span class="stat-value">10,000+</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-icon">⚡</div>
+                        <h3 class="platform-name">IC Markets</h3>
+                    </div>
+                    <div class="platform-stats">
+                        <div class="stat">
+                            <span class="stat-label">Spreads from</span>
+                            <span class="stat-value">0.0 pips</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Execution</span>
+                            <span class="stat-value">40ms</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Leverage</span>
+                            <span class="stat-value">1:500</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-icon">📈</div>
+                        <h3 class="platform-name">Plus500</h3>
+                    </div>
+                    <div class="platform-stats">
+                        <div class="stat">
+                            <span class="stat-label">CFD Trading</span>
+                            <span class="stat-value">✓</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Mobile App</span>
+                            <span class="stat-value">4.5★</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Markets</span>
+                            <span class="stat-value">2,800+</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-icon">🔥</div>
+                        <h3 class="platform-name">eToro</h3>
+                    </div>
+                    <div class="platform-stats">
+                        <div class="stat">
+                            <span class="stat-label">Copy Trading</span>
+                            <span class="stat-value">✓</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Users</span>
+                            <span class="stat-value">30M+</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Social Trading</span>
+                            <span class="stat-value">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="platform-benefits">
+                <div class="benefit-item">
+                    <span class="benefit-icon">🔗</span>
+                    <div class="benefit-text">
+                        <h4>Seamless Integration</h4>
+                        <p>Connect your existing trading accounts in minutes</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">🛡️</span>
+                    <div class="benefit-text">
+                        <h4>Secure Connection</h4>
+                        <p>Bank-level encryption protects your trading data</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">📊</span>
+                    <div class="benefit-text">
+                        <h4>Real-Time Sync</h4>
+                        <p>Live data synchronization across all platforms</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">How Trade GPT Works</h2>
+                <p class="section-subtitle">Start earning in 3 simple steps</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Sign Up</h3>
+                    <p class="step-description">Create your account in under 2 minutes</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Fund Account</h3>
+                    <p class="step-description">Deposit your initial investment amount</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Start Earning</h3>
+                    <p class="step-description">Watch your profits grow automatically</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What Our Users Say</h2>
+                <p class="section-subtitle">Join thousands of satisfied traders</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        "Trade GPT connected to my Trading212 account seamlessly. In 3 months, I've made 
+                        consistent profits averaging £1,200 monthly. The automated trading works while I sleep!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JB</div>
+                        <div class="author-info">
+                            <div class="author-name">James Butler</div>
+                            <div class="author-title">Software Engineer • London</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-profit">
+                        <span class="profit-amount">+£3,600</span>
+                        <span class="profit-period">3 Month Return</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        "Using IC Markets with Trade GPT has been incredible. The 0.0 pip spreads combined 
+                        with AI trading gave me a 23% return in 6 weeks. Fast execution is key!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <div class="author-name">Sarah Martinez</div>
+                            <div class="author-title">Day Trader • Manchester</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-profit">
+                        <span class="profit-amount">+23%</span>
+                        <span class="profit-period">6 Week ROI</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        "I was skeptical about automated trading, but Trade GPT's integration with Plus500 
+                        proved me wrong. Made $4,800 in forex trades last month alone!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MJ</div>
+                        <div class="author-info">
+                            <div class="author-name">Michael Johnson</div>
+                            <div class="author-title">Business Owner • Birmingham</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-profit">
+                        <span class="profit-amount">+$4,800</span>
+                        <span class="profit-period">Monthly Profit</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        "eToro's social trading + Trade GPT automation = perfect combo! Copied successful 
+                        traders automatically and my portfolio grew 34% in 2 months."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">LC</div>
+                        <div class="author-info">
+                            <div class="author-name">Lisa Chen</div>
+                            <div class="author-title">Marketing Manager • Edinburgh</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-profit">
+                        <span class="profit-amount">+34%</span>
+                        <span class="profit-period">2 Month Growth</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sign Up Form Section -->
+    <section id="signup" class="signup">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-info">
+                    <h2 class="signup-title">Start Your Trading Journey Today</h2>
+                    <p class="signup-description">
+                        Join thousands of successful traders using Trade GPT. Fill out the form 
+                        and our team will get you started within 24 hours.
+                    </p>
+                    <div class="signup-benefits">
+                        <div class="benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span>No hidden fees or commissions</span>
+                        </div>
+                        <div class="benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span>24/7 customer support</span>
+                        </div>
+                        <div class="benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span>Withdraw profits anytime</span>
+                        </div>
+                        <div class="benefit">
+                            <span class="benefit-icon">✓</span>
+                            <span>Free training materials included</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="signup-form-container">
+                    <form id="signupForm" class="signup-form">
+                        <h3 class="form-title">Create Your Account</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="investment">How much would you like to invest?</label>
+                            <select id="investment" name="investment" required>
+                                <option value="">Select investment amount</option>
+                                <option value="0-249">$0 - $249 USD</option>
+                                <option value="250-999">$250 - $999 USD</option>
+                                <option value="1000-1499">$1,000 - $1,499 USD</option>
+                                <option value="1500+">$1,500+ USD</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="submit-button">Get Started Now</button>
+                        <p class="form-disclaimer">
+                            By submitting this form, you agree to our Terms of Service and Privacy Policy.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <img src="logo.svg" alt="Trade GPT" class="logo-icon-img">
+                        <span class="logo-text">Trade GPT</span>
+                    </div>
+                    <p class="footer-description">
+                        AI-powered automated trading software that helps you earn passive income 24/7.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#signup">Get Started</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:support@tradegpt.com">support@tradegpt.com</a></li>
+                        <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Trade GPT. All rights reserved.</p>
+                <p class="disclaimer-text">
+                    Trading involves risk. Past performance does not guarantee future results.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-conditions.html">Terms & Conditions</a>
+                <a href="education.html">Education</a>
+                <a href="page1-landing.html">Get Started</a>
+            </div>
+            <div class="footer-disclaimer">
+                <p><strong>Risk Warning:</strong> Trading involves risk. You may lose your invested capital. This is not financial advice.</p>
+                <p>&copy; 2025 TradeGPT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
