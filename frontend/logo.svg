@@ -1,9 +1,20 @@
-<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Icon -->
-  <rect x="5" y="15" width="30" height="30" rx="6" fill="#6366F1"/>
-  <path d="M20 22L26 26V34L20 38L14 34V26L20 22Z" fill="white"/>
-  <circle cx="20" cy="30" r="3" fill="#6366F1"/>
-  
-  <!-- Text -->
-  <text x="45" y="40" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="#1F2937">TradeGPT</text>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00D4AA;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#01B574;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10B981;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="#1e293b" rx="64"/>
+  <g transform="translate(64, 64)">
+    <!-- Flowing curves creating a dynamic flower/spiral pattern -->
+    <path d="M192 96 C240 64, 288 96, 320 144 C352 192, 320 240, 272 272 C224 304, 176 272, 144 224 C112 176, 144 128, 192 96 Z" fill="url(#logoGradient)" opacity="0.9"/>
+    <path d="M272 80 C320 48, 368 80, 400 128 C432 176, 400 224, 352 256 C304 288, 256 256, 224 208 C192 160, 224 112, 272 80 Z" fill="url(#logoGradient)" opacity="0.7"/>
+    <path d="M112 176 C160 144, 208 176, 240 224 C272 272, 240 320, 192 352 C144 384, 96 352, 64 304 C32 256, 64 208, 112 176 Z" fill="url(#logoGradient)" opacity="0.8"/>
+    <path d="M208 320 C256 288, 304 320, 336 368 C368 416, 336 464, 288 496 C240 528, 192 496, 160 448 C128 400, 160 352, 208 320 Z" fill="url(#logoGradient)" opacity="0.6"/>
+    <path d="M80 272 C128 240, 176 272, 208 320 C240 368, 208 416, 160 448 C112 480, 64 448, 32 400 C0 352, 32 304, 80 272 Z" fill="url(#logoGradient)" opacity="0.7"/>
+    <!-- Central core -->
+    <circle cx="192" cy="192" r="48" fill="url(#logoGradient)" opacity="1"/>
+  </g>
 </svg>
