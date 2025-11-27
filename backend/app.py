@@ -677,6 +677,33 @@ def logout():
     session.clear()
     return jsonify({'message': 'Logout successful'})
 
+@app.route('/api/init-db-force', methods=['GET'])
+def force_init_db():
+    """Force database initialization - for debugging"""
+    try:
+        with app.app_context():
+            db.create_all()
+            
+            # Force update or create admin
+            admin = Admin.query.filter_by(username='tradeadmin').first()
+            if admin:
+                admin.password_hash = generate_password_hash('adm1234')
+                admin.is_active = True
+                db.session.commit()
+                return jsonify({'message': 'Admin password reset to adm1234', 'status': 'updated'})
+            else:
+                admin = Admin(
+                    username='tradeadmin',
+                    email='admin@tradegpt.sbs',
+                    password_hash=generate_password_hash('adm1234'),
+                    is_active=True
+                )
+                db.session.add(admin)
+                db.session.commit()
+                return jsonify({'message': 'Admin created with password adm1234', 'status': 'created'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 def is_authenticated():
     return 'admin_id' in session
 
