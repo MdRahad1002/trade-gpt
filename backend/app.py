@@ -947,11 +947,17 @@ def terms():
     """Serve terms and conditions page"""
     return send_file('../frontend/terms-conditions.html')
 
-# Always initialize database on import (for production)
-try:
-    init_db()
-except Exception as e:
-    print(f"⚠️  Database initialization warning: {e}")
+# Initialize database before first request
+@app.before_request
+def initialize_database():
+    """Initialize database on first request"""
+    if not hasattr(app, 'db_initialized'):
+        try:
+            init_db()
+            app.db_initialized = True
+        except Exception as e:
+            print(f"⚠️  Database initialization warning: {e}")
+            app.db_initialized = True  # Don't keep trying
 
 if __name__ == '__main__':
     init_db()
