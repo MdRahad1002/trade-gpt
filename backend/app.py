@@ -682,6 +682,14 @@ def force_init_db():
     """Force database initialization - for debugging"""
     try:
         with app.app_context():
+            # First, alter the column size if needed (PostgreSQL)
+            try:
+                db.session.execute(db.text('ALTER TABLE admin ALTER COLUMN password_hash TYPE VARCHAR(255)'))
+                db.session.commit()
+            except Exception as alter_error:
+                print(f"Column alter note: {alter_error}")
+                db.session.rollback()
+            
             db.create_all()
             
             # Force update or create admin
