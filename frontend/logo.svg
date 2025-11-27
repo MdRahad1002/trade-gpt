@@ -1,0 +1,9 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon -->
+  <rect x="5" y="15" width="30" height="30" rx="6" fill="#6366F1"/>
+  <path d="M20 22L26 26V34L20 38L14 34V26L20 22Z" fill="white"/>
+  <circle cx="20" cy="30" r="3" fill="#6366F1"/>
+  
+  <!-- Text -->
+  <text x="45" y="40" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="#1F2937">TradeGPT</text>
+</svg>
