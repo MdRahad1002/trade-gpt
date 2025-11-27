@@ -943,6 +943,12 @@ def terms():
     """Serve terms and conditions page"""
     return send_file('../frontend/terms-conditions.html')
 
+# Always initialize database on import (for production)
+try:
+    init_db()
+except Exception as e:
+    print(f"⚠️  Database initialization warning: {e}")
+
 if __name__ == '__main__':
     init_db()
     port = int(os.environ.get('PORT', 5000))
