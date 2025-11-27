@@ -11,6 +11,17 @@ import os
 from io import StringIO, BytesIO
 import uuid
 
+# Import analytics and email modules
+try:
+    from analytics import get_dashboard_analytics, get_conversion_funnel, get_lead_quality_scores, calculate_lead_quality_score
+    from email_notifications import email_notifier
+    ANALYTICS_ENABLED = True
+    EMAIL_ENABLED = True
+except ImportError:
+    ANALYTICS_ENABLED = False
+    EMAIL_ENABLED = False
+    print("⚠️  Analytics and email modules not loaded")
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'trade-gpt-secret-key-2025'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///leads.db'
@@ -24,7 +35,16 @@ db = SQLAlchemy(app)
 @app.after_request
 def after_request(response):
     origin = request.headers.get('Origin', '')
-    allowed_origins = ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://localhost:8000', 'http://127.0.0.1:8000']
+    allowed_origins = [
+        'https://tradegpt.sbs',
+        'https://www.tradegpt.sbs', 
+        'https://admin.tradegpt.sbs',
+        'https://api.tradegpt.sbs',
+        'http://localhost:8080', 
+        'http://127.0.0.1:8080', 
+        'http://localhost:8000', 
+        'http://127.0.0.1:8000'
+    ]
     
     if origin in allowed_origins:
         response.headers['Access-Control-Allow-Origin'] = origin
@@ -40,7 +60,16 @@ def handle_preflight():
     if request.method == 'OPTIONS':
         response = app.make_default_options_response()
         origin = request.headers.get('Origin', '')
-        allowed_origins = ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://localhost:8000', 'http://127.0.0.1:8000']
+        allowed_origins = [
+            'https://tradegpt.sbs',
+            'https://www.tradegpt.sbs',
+            'https://admin.tradegpt.sbs', 
+            'https://api.tradegpt.sbs',
+            'http://localhost:8080', 
+            'http://127.0.0.1:8080', 
+            'http://localhost:8000', 
+            'http://127.0.0.1:8000'
+        ]
         
         if origin in allowed_origins:
             response.headers['Access-Control-Allow-Origin'] = origin
@@ -61,6 +90,22 @@ class Lead(db.Model):
     source = db.Column(db.String(100), default='website')
     status = db.Column(db.String(50), default='new')
     notes = db.Column(db.Text)
+    # Enhanced tracking fields
+    utm_source = db.Column(db.String(100))
+    utm_medium = db.Column(db.String(100))
+    utm_campaign = db.Column(db.String(100))
+    utm_term = db.Column(db.String(200))
+    utm_content = db.Column(db.String(200))
+    referrer = db.Column(db.String(500))
+    landing_page = db.Column(db.String(500))
+    user_agent = db.Column(db.String(500))
+    device_type = db.Column(db.String(50))
+    ip_address = db.Column(db.String(50))
+    country_code = db.Column(db.String(10))
+    city = db.Column(db.String(100))
+    conversion_value = db.Column(db.Float, default=0.0)
+    quality_score = db.Column(db.Integer, default=0)
+    last_activity = db.Column(db.DateTime)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
@@ -75,6 +120,20 @@ class Lead(db.Model):
             'source': self.source,
             'status': self.status,
             'notes': self.notes,
+            'utm_source': self.utm_source,
+            'utm_medium': self.utm_medium,
+            'utm_campaign': self.utm_campaign,
+            'utm_term': self.utm_term,
+            'utm_content': self.utm_content,
+            'referrer': self.referrer,
+            'landing_page': self.landing_page,
+            'device_type': self.device_type,
+            'ip_address': self.ip_address,
+            'country_code': self.country_code,
+            'city': self.city,
+            'conversion_value': self.conversion_value,
+            'quality_score': self.quality_score,
+            'last_activity': self.last_activity.isoformat() if self.last_activity else None,
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'updated_at': self.updated_at.isoformat() if self.updated_at else None
         }
@@ -253,7 +312,17 @@ def create_lead():
         
         notes = ", ".join(notes_parts)
         
-        # Create new lead
+        # Get IP address
+        ip_address = request.headers.get('X-Forwarded-For', request.remote_addr)
+        if ip_address and ',' in ip_address:
+            ip_address = ip_address.split(',')[0].strip()
+        
+        # Calculate quality score
+        quality_score = 50  # Default
+        if ANALYTICS_ENABLED:
+            quality_score = calculate_lead_quality_score(data)
+        
+        # Create new lead with enhanced tracking
         lead = Lead(
             first_name=first_name,
             last_name=last_name,
@@ -261,11 +330,32 @@ def create_lead():
             phone=phone,
             investment=investment,
             source=data.get('source', 'website'),
-            notes=notes
+            notes=notes,
+            # Enhanced tracking
+            utm_source=data.get('utm_source'),
+            utm_medium=data.get('utm_medium'),
+            utm_campaign=data.get('utm_campaign'),
+            utm_term=data.get('utm_term'),
+            utm_content=data.get('utm_content'),
+            referrer=data.get('referrer'),
+            landing_page=data.get('landing_page'),
+            user_agent=data.get('user_agent'),
+            device_type=data.get('device_type'),
+            ip_address=ip_address,
+            quality_score=quality_score,
+            last_activity=datetime.utcnow()
         )
         
         db.session.add(lead)
         db.session.commit()
+        
+        # Send email notifications
+        if EMAIL_ENABLED:
+            try:
+                email_notifier.notify_new_lead(lead.to_dict())
+                email_notifier.send_welcome_email(lead.to_dict())
+            except Exception as e:
+                print(f"Email notification error: {e}")
         
         # Trigger CRM integrations
         trigger_crm_integrations(lead)
@@ -334,17 +424,29 @@ def update_lead(lead_id):
         lead = Lead.query.get_or_404(lead_id)
         data = request.get_json()
         
+        # Track status change
+        old_status = lead.status
+        new_status = data.get('status', lead.status)
+        
         # Update lead fields
         lead.first_name = data.get('first_name', lead.first_name)
         lead.last_name = data.get('last_name', lead.last_name)
         lead.email = data.get('email', lead.email)
         lead.phone = data.get('phone', lead.phone)
         lead.investment = data.get('investment', lead.investment)
-        lead.status = data.get('status', lead.status)
+        lead.status = new_status
         lead.notes = data.get('notes', lead.notes)
         lead.updated_at = datetime.utcnow()
+        lead.last_activity = datetime.utcnow()
         
         db.session.commit()
+        
+        # Send status change notification
+        if EMAIL_ENABLED and old_status != new_status:
+            try:
+                email_notifier.notify_status_change(lead.to_dict(), old_status, new_status)
+            except Exception as e:
+                print(f"Status change email error: {e}")
         
         return jsonify({
             'message': 'Lead updated successfully',
@@ -716,6 +818,49 @@ def create_integration():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+# Analytics endpoints
+@app.route('/api/analytics/dashboard', methods=['GET'])
+def get_analytics_dashboard():
+    if not is_authenticated():
+        return jsonify({'error': 'Authentication required'}), 401
+    
+    if not ANALYTICS_ENABLED:
+        return jsonify({'error': 'Analytics module not available'}), 503
+    
+    try:
+        analytics = get_dashboard_analytics(db, Lead)
+        return jsonify(analytics)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/analytics/funnel', methods=['GET'])
+def get_analytics_funnel():
+    if not is_authenticated():
+        return jsonify({'error': 'Authentication required'}), 401
+    
+    if not ANALYTICS_ENABLED:
+        return jsonify({'error': 'Analytics module not available'}), 503
+    
+    try:
+        funnel = get_conversion_funnel(db, Lead)
+        return jsonify(funnel)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/analytics/quality', methods=['GET'])
+def get_analytics_quality():
+    if not is_authenticated():
+        return jsonify({'error': 'Authentication required'}), 401
+    
+    if not ANALYTICS_ENABLED:
+        return jsonify({'error': 'Analytics module not available'}), 503
+    
+    try:
+        quality = get_lead_quality_scores(db, Lead)
+        return jsonify(quality)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 # Initialize database and create default admin
 def init_db():
     with app.app_context():
@@ -724,13 +869,19 @@ def init_db():
         # Create default admin if none exists
         if not Admin.query.first():
             admin = Admin(
-                username='trader07',
-                email='admin@tradegpt.com',
-                password_hash=generate_password_hash('trade123')
+                username='tradeadmin',
+                email='admin@tradegpt.sbs',
+                password_hash=generate_password_hash('adm1234')
             )
             db.session.add(admin)
             db.session.commit()
-            print("Default admin created: trader07 / trade123")
+            print("Default admin created: tradeadmin / adm1234")
+        
+        print("✅ Database initialized")
+        if ANALYTICS_ENABLED:
+            print("✅ Analytics enabled")
+        if EMAIL_ENABLED:
+            print("✅ Email notifications enabled")
 
 if __name__ == '__main__':
     init_db()

@@ -261,18 +261,38 @@ if (signupForm) {
         submitButton.innerHTML = '<span class="loading-spinner"></span> Processing...';
         submitButton.disabled = true;
         
-        // Get form data
+        // Get form data with enhanced tracking
+        const urlParams = new URLSearchParams(window.location.search);
         const formData = {
             firstName: document.getElementById('firstName').value.trim(),
             lastName: document.getElementById('lastName').value.trim(),
             email: document.getElementById('email').value.trim(),
             phone: document.getElementById('phone').value.trim(),
             investment: document.getElementById('investment').value,
-            source: 'website'
+            source: 'website',
+            // Enhanced tracking
+            utm_source: urlParams.get('utm_source') || 'direct',
+            utm_medium: urlParams.get('utm_medium') || 'none',
+            utm_campaign: urlParams.get('utm_campaign') || 'none',
+            utm_term: urlParams.get('utm_term') || '',
+            utm_content: urlParams.get('utm_content') || '',
+            referrer: document.referrer || 'direct',
+            landing_page: window.location.pathname,
+            user_agent: navigator.userAgent,
+            screen_resolution: `${window.screen.width}x${window.screen.height}`,
+            browser_language: navigator.language,
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            device_type: /Mobile|Android|iPhone|iPad/.test(navigator.userAgent) ? 'mobile' : 'desktop',
+            timestamp: new Date().toISOString()
         };
         
         try {
-            const response = await fetch('http://localhost:5000/api/leads', {
+            // Use local API in development, production API in production
+            const apiURL = window.location.hostname === 'localhost' 
+                ? 'http://localhost:5000/api/leads'
+                : 'https://api.tradegpt.sbs/api/leads';
+            
+            const response = await fetch(apiURL, {
                 method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
