@@ -1,10 +1,12 @@
 services:
   - type: web
     name: trade-gpt-backend
-    env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    runtime: python
+    buildCommand: cd backend && pip install -r requirements.txt
+    startCommand: cd backend && gunicorn app:app --bind 0.0.0.0:$PORT
     envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
       - key: FLASK_ENV
         value: production
       - key: SECRET_KEY
