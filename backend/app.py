@@ -24,7 +24,8 @@ except ImportError:
 # Serve frontend from parent directory
 app = Flask(__name__, 
             static_folder='../frontend',
-            static_url_path='')
+            static_url_path='/static',
+            template_folder='../frontend')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'trade-gpt-secret-key-2025')
 
 # Use PostgreSQL in production, SQLite in development
