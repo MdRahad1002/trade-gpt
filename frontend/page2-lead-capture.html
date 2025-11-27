@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Free Call - TradeGPT</title>
+    <link rel="stylesheet" href="funnel-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <span class="logo-icon">🤖</span>
+                    <span class="logo-text">TradeGPT</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Lead Capture Section -->
+    <section class="lead-section">
+        <div class="container">
+            <div class="lead-container">
+                <div class="lead-header">
+                    <h1 class="lead-title">Book Your Free Explanation Call</h1>
+                    <p class="lead-subtitle">Fill out the form below and a specialist will contact you to explain how TradeGPT works</p>
+                </div>
+
+                <div class="form-wrapper">
+                    <form id="leadForm" class="lead-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required placeholder="Enter your first name">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required placeholder="Enter your last name">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="country">Country *</label>
+                            <select id="country" name="country" required>
+                                <option value="">Select your country</option>
+                                <option value="US">United States</option>
+                                <option value="GB">United Kingdom</option>
+                                <option value="CA">Canada</option>
+                                <option value="AU">Australia</option>
+                                <option value="DE">Germany</option>
+                                <option value="FR">France</option>
+                                <option value="ES">Spain</option>
+                                <option value="IT">Italy</option>
+                                <option value="NL">Netherlands</option>
+                                <option value="SE">Sweden</option>
+                                <option value="NO">Norway</option>
+                                <option value="DK">Denmark</option>
+                                <option value="FI">Finland</option>
+                                <option value="PL">Poland</option>
+                                <option value="CH">Switzerland</option>
+                                <option value="AT">Austria</option>
+                                <option value="BE">Belgium</option>
+                                <option value="IE">Ireland</option>
+                                <option value="NZ">New Zealand</option>
+                                <option value="SG">Singapore</option>
+                                <option value="OTHER">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="callTime">Preferred Call Time</label>
+                            <select id="callTime" name="callTime">
+                                <option value="">Select preferred time</option>
+                                <option value="morning">Morning (8AM - 12PM)</option>
+                                <option value="afternoon">Afternoon (12PM - 5PM)</option>
+                                <option value="evening">Evening (5PM - 9PM)</option>
+                                <option value="anytime">Anytime</option>
+                            </select>
+                        </div>
+
+                        <div class="qualification-box">
+                            <label class="qualification-label">
+                                <strong>Qualification Question:</strong>
+                            </label>
+                            <p class="qualification-question">Do you have at least $250 available to activate the AI strategy features inside the broker platform?</p>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="hasDeposit" value="yes" required>
+                                    <span>Yes, I have at least $250 available</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="hasDeposit" value="no" required>
+                                    <span>No, not at this time</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-disclaimer">
+                            <p><small>⚠️ All trading involves risk. No guarantees of profit. By submitting this form, you acknowledge that trading may result in loss of capital and agree to receive communication about TradeGPT.</small></p>
+                        </div>
+
+                        <button type="submit" class="submit-button">
+                            <span class="button-text">Submit & Continue</span>
+                            <span class="button-icon">→</span>
+                        </button>
+
+                        <div id="formMessage" class="form-message"></div>
+                    </form>
+                </div>
+
+                <div class="trust-indicators">
+                    <div class="trust-item">
+                        <div class="trust-icon">🔒</div>
+                        <p>Your information is secure and will never be shared</p>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon">✓</div>
+                        <p>No obligation - Free explanation call</p>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon">📞</div>
+                        <p>Support assistant will contact you within 24 hours</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 TradeGPT. Educational tool only. Trading involves risk.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Form Handling Script -->
+    <script>
+        document.getElementById('leadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitButton = this.querySelector('.submit-button');
+            const formMessage = document.getElementById('formMessage');
+            const buttonText = submitButton.querySelector('.button-text');
+            
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            buttonText.textContent = 'Submitting...';
+            formMessage.style.display = 'none';
+            
+            // Collect form data
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                country: document.getElementById('country').value,
+                callTime: document.getElementById('callTime').value,
+                hasDeposit: document.querySelector('input[name="hasDeposit"]:checked').value,
+                source: 'page2-lead-capture',
+                timestamp: new Date().toISOString()
+            };
+            
+            try {
+                // Send to backend API
+                const response = await fetch('/api/leads', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                if (response.ok || response.status === 409) {
+                    // Success - redirect to thank you page
+                    window.location.href = 'page3-thankyou.html';
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                // On error, still redirect but show could try again
+                console.error('Form submission error:', error);
+                // For now, still redirect on error to maintain funnel flow
+                window.location.href = 'page3-thankyou.html';
+            }
+        });
+    </script>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-conditions.html">Terms & Conditions</a>
+                <a href="index.html">Home</a>
+            </div>
+            <div class="footer-disclaimer">
+                <p><strong>Risk Warning:</strong> Trading involves risk. You may lose your invested capital. This is not financial advice.</p>
+                <p>&copy; 2025 TradeGPT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

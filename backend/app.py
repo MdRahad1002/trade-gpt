@@ -894,6 +894,26 @@ def admin_page():
     """Serve admin dashboard"""
     return send_file('../admin/index.html')
 
+@app.route('/page2-lead-capture.html')
+def page2():
+    """Serve lead capture page"""
+    return send_file('../page2-lead-capture.html')
+
+@app.route('/page3-thankyou.html')
+def page3():
+    """Serve thank you page"""
+    return send_file('../page3-thankyou.html')
+
+@app.route('/landing-page-trade-gpt.html')
+def landing():
+    """Serve alternative landing page"""
+    return send_file('../landing-page-trade-gpt.html')
+
+@app.route('/education.html')
+def education():
+    """Serve education page"""
+    return send_file('../education.html')
+
 @app.route('/privacy-policy')
 def privacy():
     """Serve privacy policy page"""
