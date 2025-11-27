@@ -866,7 +866,7 @@ def init_db():
             db.create_all()
             print("✅ Database tables created/verified")
             
-            # Create default admin if none exists
+            # Check if admin exists
             existing_admin = Admin.query.filter_by(username='tradeadmin').first()
             if not existing_admin:
                 admin = Admin(
@@ -880,7 +880,11 @@ def init_db():
                 print("✅ Default admin created: tradeadmin / adm1234")
                 print("⚠️  IMPORTANT: Change the password after first login!")
             else:
-                print("✅ Admin user exists: tradeadmin")
+                # Update password for existing admin to ensure it's correct
+                existing_admin.password_hash = generate_password_hash('adm1234')
+                existing_admin.is_active = True
+                db.session.commit()
+                print("✅ Admin user exists: tradeadmin (password reset to adm1234)")
             
             # List all tables
             inspector = db.inspect(db.engine)
