@@ -287,10 +287,10 @@ if (signupForm) {
         };
         
         try {
-            // Use same origin for API (backend serves frontend)
+            // Use local API in development, production API in production
             const apiURL = window.location.hostname === 'localhost' 
                 ? 'http://localhost:5000/api/leads'
-                : window.location.origin + '/api/leads';
+                : 'https://trade-gpt-ay57.onrender.com/api/leads';
             
             const response = await fetch(apiURL, {
                 method: 'POST',
