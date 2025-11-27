@@ -3,8 +3,8 @@ class AdminDashboard {
     constructor() {
         // IMPORTANT: Replace this URL with your Railway backend URL after deployment
         // Example: 'https://tradegpt-production-xxxx.up.railway.app/api'
-        // Production: https://api.tradegpt.sbs/api
-        this.baseURL = window.location.hostname === 'localhost' ? 'http://localhost:5000/api' : 'https://api.tradegpt.sbs/api';
+        // Production: https://trade-gpt-ay57.onrender.com/api
+        this.baseURL = window.location.hostname === 'localhost' ? 'http://localhost:5000/api' : 'https://trade-gpt-ay57.onrender.com/api';
         this.currentPage = 1;
         this.leadsPerPage = 25;
         this.allLeads = [];

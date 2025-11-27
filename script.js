@@ -290,7 +290,7 @@ if (signupForm) {
             // Use local API in development, production API in production
             const apiURL = window.location.hostname === 'localhost' 
                 ? 'http://localhost:5000/api/leads'
-                : 'https://api.tradegpt.sbs/api/leads';
+                : 'https://trade-gpt-ay57.onrender.com/api/leads';
             
             const response = await fetch(apiURL, {
                 method: 'POST',
@@ -646,7 +646,7 @@ if (heroStats) {
 
 console.log('✅ Trade GPT initialized successfully!');
 console.log('📊 Live chart updating with 24-hour reset');
-console.log('📧 Form submissions sending to: http://localhost:5000/api/leads');
+console.log('📧 Form submissions sending to: https://trade-gpt-ay57.onrender.com/api/leads');
 
 // ========================================
 // BUTTON CLICK TRACKING & DEBUGGING
