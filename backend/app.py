@@ -4,7 +4,6 @@ from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
 import csv
-import pandas as pd
 import requests
 import json
 import os
@@ -565,29 +564,18 @@ def export_excel():
                 'Updated At': lead.updated_at.strftime('%Y-%m-%d %H:%M:%S') if lead.updated_at else ''
             })
         
-        df = pd.DataFrame(data)
-        
-        # Create Excel file
-        filename = f'leads_export_{datetime.now().strftime("%Y%m%d_%H%M%S")}.xlsx'
+        # Create CSV export instead of Excel
+        filename = f'leads_export_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv'
         filepath = os.path.join('exports', filename)
         os.makedirs('exports', exist_ok=True)
         
-        with pd.ExcelWriter(filepath, engine='openpyxl') as writer:
-            df.to_excel(writer, sheet_name='Leads', index=False)
-            
-            # Format the worksheet
-            worksheet = writer.sheets['Leads']
-            for column in worksheet.columns:
-                max_length = 0
-                column = [cell for cell in column]
-                for cell in column:
-                    try:
-                        if len(str(cell.value)) > max_length:
-                            max_length = len(str(cell.value))
-                    except:
-                        pass
-                adjusted_width = min(max_length + 2, 50)
-                worksheet.column_dimensions[column[0].column_letter].width = adjusted_width
+        # Write CSV file
+        with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
+            if data:
+                fieldnames = data[0].keys()
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
+                writer.writerows(data)
         
         return send_file(filepath, as_attachment=True, download_name=filename)
         
