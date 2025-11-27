@@ -3,11 +3,11 @@ services:
     name: trade-gpt-backend
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: python app.py
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
     envVars:
-      - key: PORT
-        value: 5000
       - key: FLASK_ENV
         value: production
       - key: SECRET_KEY
         generateValue: true
+      - key: DATABASE_URL
+        value: sqlite:///instance/leads.db

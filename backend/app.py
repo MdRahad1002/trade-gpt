@@ -23,8 +23,14 @@ except ImportError:
     print("⚠️  Analytics and email modules not loaded")
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'trade-gpt-secret-key-2025'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///leads.db'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'trade-gpt-secret-key-2025')
+
+# Use PostgreSQL in production, SQLite in development
+DATABASE_URL = os.environ.get('DATABASE_URL')
+if DATABASE_URL and DATABASE_URL.startswith('postgres://'):
+    DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL or 'sqlite:///leads.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 app.config['SESSION_COOKIE_HTTPONLY'] = True
