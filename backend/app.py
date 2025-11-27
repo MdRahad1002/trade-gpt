@@ -862,24 +862,40 @@ def get_analytics_quality():
 # Initialize database and create default admin
 def init_db():
     with app.app_context():
-        db.create_all()
-        
-        # Create default admin if none exists
-        if not Admin.query.first():
-            admin = Admin(
-                username='tradeadmin',
-                email='admin@tradegpt.sbs',
-                password_hash=generate_password_hash('adm1234')
-            )
-            db.session.add(admin)
-            db.session.commit()
-            print("Default admin created: tradeadmin / adm1234")
-        
-        print("✅ Database initialized")
-        if ANALYTICS_ENABLED:
-            print("✅ Analytics enabled")
-        if EMAIL_ENABLED:
-            print("✅ Email notifications enabled")
+        try:
+            db.create_all()
+            print("✅ Database tables created/verified")
+            
+            # Create default admin if none exists
+            existing_admin = Admin.query.filter_by(username='tradeadmin').first()
+            if not existing_admin:
+                admin = Admin(
+                    username='tradeadmin',
+                    email='admin@tradegpt.sbs',
+                    password_hash=generate_password_hash('adm1234'),
+                    is_active=True
+                )
+                db.session.add(admin)
+                db.session.commit()
+                print("✅ Default admin created: tradeadmin / adm1234")
+                print("⚠️  IMPORTANT: Change the password after first login!")
+            else:
+                print("✅ Admin user exists: tradeadmin")
+            
+            # List all tables
+            inspector = db.inspect(db.engine)
+            table_names = inspector.get_table_names()
+            print(f"✅ Database initialized with {len(table_names)} tables: {', '.join(table_names)}")
+            
+            if ANALYTICS_ENABLED:
+                print("✅ Analytics enabled")
+            if EMAIL_ENABLED:
+                print("✅ Email notifications enabled")
+                
+        except Exception as e:
+            print(f"❌ Database initialization error: {e}")
+            import traceback
+            traceback.print_exc()
 
 # ========================================
 # FRONTEND ROUTES - Serve HTML Pages
