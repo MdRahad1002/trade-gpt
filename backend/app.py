@@ -923,6 +923,7 @@ def page3():
     return send_file('../frontend/page3-thankyou.html')
 
 @app.route('/landing-page-trade-gpt.html')
+@app.route('/landing-page-trade-gpt')
 def landing():
     """Serve alternative landing page"""
     return send_file('../frontend/landing-page-trade-gpt.html')
