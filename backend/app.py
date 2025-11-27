@@ -21,7 +21,10 @@ except ImportError:
     EMAIL_ENABLED = False
     print("⚠️  Analytics and email modules not loaded")
 
-app = Flask(__name__)
+# Serve frontend from parent directory
+app = Flask(__name__, 
+            static_folder='../frontend',
+            static_url_path='')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'trade-gpt-secret-key-2025')
 
 # Use PostgreSQL in production, SQLite in development
@@ -876,6 +879,30 @@ def init_db():
             print("✅ Analytics enabled")
         if EMAIL_ENABLED:
             print("✅ Email notifications enabled")
+
+# ========================================
+# FRONTEND ROUTES - Serve HTML Pages
+# ========================================
+
+@app.route('/')
+def index():
+    """Serve main landing page"""
+    return send_file('../index.html')
+
+@app.route('/admin')
+def admin_page():
+    """Serve admin dashboard"""
+    return send_file('../admin/index.html')
+
+@app.route('/privacy-policy')
+def privacy():
+    """Serve privacy policy page"""
+    return send_file('../privacy-policy.html')
+
+@app.route('/terms-conditions')
+def terms():
+    """Serve terms and conditions page"""
+    return send_file('../terms-conditions.html')
 
 if __name__ == '__main__':
     init_db()
