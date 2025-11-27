@@ -887,42 +887,43 @@ def init_db():
 @app.route('/')
 def index():
     """Serve main landing page"""
-    return send_file('../index.html')
+    return send_file('../frontend/index.html')
 
 @app.route('/admin')
+@app.route('/admin/')
 def admin_page():
     """Serve admin dashboard"""
-    return send_file('../admin/index.html')
+    return send_file('../frontend/admin/index.html')
 
 @app.route('/page2-lead-capture.html')
 def page2():
     """Serve lead capture page"""
-    return send_file('../page2-lead-capture.html')
+    return send_file('../frontend/page2-lead-capture.html')
 
 @app.route('/page3-thankyou.html')
 def page3():
     """Serve thank you page"""
-    return send_file('../page3-thankyou.html')
+    return send_file('../frontend/page3-thankyou.html')
 
 @app.route('/landing-page-trade-gpt.html')
 def landing():
     """Serve alternative landing page"""
-    return send_file('../landing-page-trade-gpt.html')
+    return send_file('../frontend/landing-page-trade-gpt.html')
 
 @app.route('/education.html')
 def education():
     """Serve education page"""
-    return send_file('../education.html')
+    return send_file('../frontend/education.html')
 
 @app.route('/privacy-policy')
 def privacy():
     """Serve privacy policy page"""
-    return send_file('../privacy-policy.html')
+    return send_file('../frontend/privacy-policy.html')
 
 @app.route('/terms-conditions')
 def terms():
     """Serve terms and conditions page"""
-    return send_file('../terms-conditions.html')
+    return send_file('../frontend/terms-conditions.html')
 
 if __name__ == '__main__':
     init_db()
