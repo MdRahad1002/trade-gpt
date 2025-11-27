@@ -4,7 +4,7 @@ services:
     runtime: python
     rootDir: backend
     buildCommand: pip install -r requirements.txt
-    startCommand: python init_production_db.py --force && gunicorn app:app --bind 0.0.0.0:$PORT
+    startCommand: python -c "from app import app, db, Admin; from werkzeug.security import generate_password_hash; app.app_context().push(); db.create_all(); print('Tables created'); admin = Admin.query.filter_by(username='tradeadmin').first(); admin = admin or Admin(username='tradeadmin', email='admin@tradegpt.sbs', password_hash=generate_password_hash('adm1234'), is_active=True); not Admin.query.filter_by(username='tradeadmin').first() and (db.session.add(admin), db.session.commit()); print('Admin ready')" && gunicorn app:app --bind 0.0.0.0:$PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.7
